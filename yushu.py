@@ -9,4 +9,5 @@ def hello():
     return 'hello,ten!'
 
 
-app.run()
+# app.add_url_rule('/hello', view_func=hello)
+app.run(debug=True)
