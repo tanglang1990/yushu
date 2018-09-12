@@ -111,6 +111,6 @@ venv.bak/
 dmypy.json
 
 # ide
-.idea/
+*.idea/
 
 
