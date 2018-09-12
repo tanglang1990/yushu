@@ -1,5 +1,7 @@
 from flask import Flask
 
+from config import DEBUG
+
 app = Flask(__name__)
 
 
@@ -8,4 +10,4 @@ def hello():
     return 'hello,ten!'
 
 
-app.run(host='0.0.0.0', debug=True, port=81)
+app.run(host='0.0.0.0', debug=DEBUG, port=81)
