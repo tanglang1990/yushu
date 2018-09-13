@@ -4,7 +4,9 @@ from yushu import app
 from helper import is_isbn_or_key
 from yushu_book import YuShuBook
 
-print(f"id为{id(app)}的app注册路由")
+
+# 蓝图 blueprint
+
 @app.route('/book/search/<q>/<page>')
 def search(q, page):
     '''
