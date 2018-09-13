@@ -1,13 +1,15 @@
 from flask import jsonify
+from flask import Blueprint
 
-from yushu import app
 from helper import is_isbn_or_key
 from yushu_book import YuShuBook
+
+web = Blueprint('web', __name__)
 
 
 # 蓝图 blueprint
 
-@app.route('/book/search/<q>/<page>')
+@web.route('/book/search/<q>/<page>')
 def search(q, page):
     '''
         q:普通关键字, isbn
