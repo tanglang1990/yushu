@@ -1,10 +1,10 @@
 from flask import jsonify
 
+from yushu import app
 from helper import is_isbn_or_key
 from yushu_book import YuShuBook
-from yushu import app
 
-
+print(f"id为{id(app)}的app注册路由")
 @app.route('/book/search/<q>/<page>')
 def search(q, page):
     '''
