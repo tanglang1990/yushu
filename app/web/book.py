@@ -4,10 +4,8 @@ from flask import Blueprint
 from helper import is_isbn_or_key
 from yushu_book import YuShuBook
 
-web = Blueprint('web', __name__)
+from . import web
 
-
-# 蓝图 blueprint
 
 @web.route('/book/search/<q>/<page>')
 def search(q, page):

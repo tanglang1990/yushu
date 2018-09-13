@@ -9,5 +9,5 @@ def create_app():
 
 
 def registe_blueprint(app):
-    from app.web.book import web
+    from app.web import web
     app.register_blueprint(web)
