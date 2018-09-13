@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, make_response
+from flask import Flask, make_response, jsonify
 
 from helper import is_isbn_or_key
 from yushu_book import YuShuBook
@@ -20,8 +20,10 @@ def search(q, page):
         result = YuShuBook.search_by_isbn(q)
     else:
         result = YuShuBook.search_by_keyword(q)
+    # restful api 难点在于url设计，怎样很好的代表资源，而不是技术上面如何返回
+    return jsonify(result)
     # json
-    return json.dumps(result), 200, {'content-type': 'application/json'}
+    # return json.dumps(result), 200, {'content-type': 'application/json'}
 
 
 if __name__ == '__main__':
