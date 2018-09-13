@@ -1,4 +1,4 @@
-def is_isbn_or_key(key_word):
+def is_isbn_or_key(keyword):
     """
     判断是isbn还是关键字
     isbn13 由13个0-9的数字组成
@@ -6,11 +6,11 @@ def is_isbn_or_key(key_word):
     :param key_word:
     :return:
     """
-    key_word = key_word.strip()
+    keyword = keyword.strip()
     isbn_or_key = 'key'
-    if len(key_word) == 13 and key_word.isdigit():
+    if len(keyword) == 13 and keyword.isdigit():
         isbn_or_key = 'isbn'
-    short_key_word = key_word.replace('-', '')
-    if len(short_key_word) == 10 and short_key_word.isdigit():
+    short_keyword = keyword.replace('-', '')
+    if len(short_keyword) == 10 and short_keyword.isdigit():
         isbn_or_key = 'isbn'
     return isbn_or_key
