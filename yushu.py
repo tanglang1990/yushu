@@ -1,6 +1,7 @@
 from flask import Flask, make_response
 
 from helper import is_isbn_or_key
+from yushu_book import YuShuBook
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -12,8 +13,12 @@ def search(q, page):
         q:普通关键字, isbn
         page:页码
     '''
-    isbn_or_key = is_isbn_or_key
-    pass
+    isbn_or_key = is_isbn_or_key()
+    if isbn_or_key == 'isbn':
+        result = YuShuBook.search_by_isbn(q)
+    else:
+        result = YuShuBook.search_by_keyword(q)
+    return result
 
 
 if __name__ == '__main__':
