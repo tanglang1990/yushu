@@ -2,6 +2,7 @@ from httper import HTTP
 
 
 class YuShuBook:
+    per_page = 15
     isbn_url = 'https://api.douban.com/v2/book/isbn/{}'
     keyword_url = 'https://api.douban.com/v2/book/search?q={}&start={}&count={}'
 
@@ -12,7 +13,7 @@ class YuShuBook:
         return result
 
     @classmethod
-    def search_by_keyword(cls, q, start=0, count=15):
-        url = cls.keyword_url.format(q, start, count)
+    def search_by_keyword(cls, q, page=1):
+        url = cls.keyword_url.format(q, (page-1)*cls.per_page, cls.per_page)
         result = HTTP.get(url)
         return result
