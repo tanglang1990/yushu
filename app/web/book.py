@@ -24,7 +24,7 @@ def search():
     '''
     form = SearchForm(request.args)
     if form.validate():
-        q = form.q.data
+        q = form.q.data.strip()
         page = form.page.data
 
         isbn_or_key = is_isbn_or_key(q)
@@ -34,4 +34,4 @@ def search():
             result = YuShuBook.search_by_keyword(q)
         return jsonify(result)
     else:
-        return jsonify({'msg': '验证错误'})
+        return jsonify(form.errors)
