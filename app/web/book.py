@@ -13,12 +13,17 @@ def search():
         q:普通关键字, isbn
         page:页码
         /book/search?q=9787806737842&page=1
+        数据校验:
+            q 至少一个字符
+            page 正整数
+        数据校验演变（从比较差到比较好）：
+            1 在视图函数中写if else判断
+            2 将if else判断封装成函数
+            3 使用wtforms
     '''
-    # Request
-    # HTTP请求信息：请求方式、参数、remote ip等等，可以看成对WSGI中environ的封装
     q = request.args['q']
     page = request.args['page']
-    # d = request.args.to_dict()
+
     isbn_or_key = is_isbn_or_key(q)
     if isbn_or_key == 'isbn':
         result = YuShuBook.search_by_isbn(q)
