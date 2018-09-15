@@ -15,4 +15,4 @@ class Book():
     author = ''
     isbn = ''
     price = 0
-    binding = ''  # 封面
+    binding = ''  # 装帧版本
