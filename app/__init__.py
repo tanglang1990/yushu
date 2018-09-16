@@ -17,7 +17,9 @@ def create_app():
         接下来就是flask中最难理解的部分了，希望大家要有信心
     '''
     db.init_app(app)
-    db.create_all(app=app)
+    # db.create_all(app=app)
+    with app.app_context():
+        db.create_all()
     return app
 
 
