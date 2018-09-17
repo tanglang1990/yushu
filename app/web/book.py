@@ -8,20 +8,20 @@ from app.spider.yushu_book import YuShuBook
 from . import web
 
 
+@web.route('/test')
+def test1():
+    from app.libs.none_local import n
+    print(n.v)
+    n.v = 2
+    print('.................')
+    print(getattr(request, 'v', None))
+    setattr(request, 'v', 2)
+    print('.................')
+    return ''
+
+
 @web.route('/book/search')
 def search():
-    '''
-        q:普通关键字, isbn
-        page:页码
-        /book/search?q=9787806737842&page=1
-        数据校验:
-            q 至少一个字符
-            page 正整数
-        数据校验演变（从比较差到比较好）：
-            1 在视图函数中写if else判断
-            2 将if else判断封装成函数
-            3 使用wtforms
-    '''
     form = SearchForm(request.args)
     if form.validate():
         q = form.q.data.strip()
