@@ -4,9 +4,11 @@ from app.models.book import db
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='view_models/static', static_url_path='/statics')
+    # print(__name__) # 打印显示app
     # 为什么找到了app下的static这个目录就是因为__name__的缘故
-    # print(__name__)
+    # 通过 static_folder 关键字参数指定静态文件的目录, 如：static_folder='test/static'
+    # 通过 static_url_path 关键字参数指定静态文件的访问url前缀, 如: static_url_path='/statics'
     app.config.from_object('app.secure')
     app.config.from_object('app.setting')
     registe_blueprint(app)
