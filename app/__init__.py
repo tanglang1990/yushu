@@ -5,6 +5,8 @@ from app.models.book import db
 
 def create_app():
     app = Flask(__name__)
+    # 为什么找到了app下的static这个目录就是因为__name__的缘故
+    # print(__name__)
     app.config.from_object('app.secure')
     app.config.from_object('app.setting')
     registe_blueprint(app)
