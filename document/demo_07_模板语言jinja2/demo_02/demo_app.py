@@ -1,7 +1,13 @@
+from flask import Flask, render_template, flash
+
 from demo_class import Teacher
-from flask import Flask, render_template
 
 app = Flask(__name__)
+app.secret_key = '\xefa\xc6\xf9\xa4-\xf8X\xd3\xb4c4\xefr\x1b\xbd\x9b\xc9\xa1ua%Nn'
+# 可以通过以下方法得到一个secret_key
+# import os
+# s =os.urandom(24)
+# print(s)
 
 
 @app.route('/demo01')
@@ -49,6 +55,15 @@ def demo06():
 @app.route('/demo07')
 def demo07():
     return render_template('demo07.html')
+
+
+@app.route('/demo08')
+def demo08():
+    # 消息闪现  Message flash
+    # 详见：http://docs.jinkan.org/docs/flask/patterns/flashing.html
+    flash('Hello,Ten', category='info')
+    flash('input is error', category='error')
+    return render_template('demo08.html')
 
 
 if __name__ == '__main__':

@@ -5,6 +5,7 @@ Jinja2 是一个现代的，设计者友好的，仿照 Django 模板的 Python 
 
 * [http://jinja.pocoo.org/docs/2.10/](http://jinja.pocoo.org/docs/2.10/) （英文）
 * [http://docs.jinkan.org/docs/jinja2/](http://docs.jinkan.org/docs/jinja2/) （中文）
+* http://docs.jinkan.org/docs/jinja2/templates.html#
 
 ## 学习方法
 * 关键的需要记住

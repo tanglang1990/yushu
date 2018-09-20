@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h3>消息闪现、SecretyKey与变量作用域</h3>
+
+  {% set msgs = get_flashed_messages() %}
+  {{ msgs }}
+  </br>
+
+  {% with  msgs1 = get_flashed_messages() %}
+    {{ msgs1 }}
+  {% endwith %}
+  </br>
+
+  {% with  msgs2 = get_flashed_messages(category_filter=["error"]) %}
+    {{ msgs2 }}
+  {% endwith %}
+  </br>
+
+  {% with msgs3 = get_flashed_messages(with_categories=true) %}
+    {% for category, message in msgs3 %}
+      {{ category }} {{ message }}
+    {% endfor %}
+  {% endwith %}
+
+{% endblock %}
