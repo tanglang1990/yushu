@@ -46,6 +46,11 @@ def demo06():
     return render_template('demo06.html', user=user)
 
 
+@app.route('/demo07')
+def demo07():
+    return render_template('demo07.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
     # 开启调试模式之后，在修改完模板页面之后能立即生效

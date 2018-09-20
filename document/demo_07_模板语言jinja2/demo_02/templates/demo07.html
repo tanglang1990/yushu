@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+  <img src="http://127.0.0.1:5000/static/test.jpg" width="100"> <!--千万不要在真实的项目中使用这种搞法-->
+
+  <img src="/static/test.jpg" width="100">
+
+  <img src="{{ url_for('static', filename='test.jpg') }}" width="100">
+
+  <a href="{{ url_for('demo06') }}">demo06</a>
+{% endblock %}
