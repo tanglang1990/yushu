@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  {#  要继承父模块的内容可以通过 {{ super() }}实现#}
+  {#  {{ super() }} #}
+  <h1>Welcome to DongNao</h1>
+{% endblock %}
+
+{% block foot %}
+  some thing in foot
+  {% include 'base_footer.html' %}
+{% endblock %}
+

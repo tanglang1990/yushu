@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>循环</title>
+</head>
+<body>
+{# for循环 #}
+{% for item in teachers1 %}
+  <h3>{{ loop.index }}、{{ item }}</h3>  {#loop.index	当前循环迭代的次数（从 1 开始）#}
+{% endfor %}
+
+<hr/>
+
+{# 循环嵌套 #}
+{% for item in teachers2 %}
+  <ul>
+    <h3>{{ item.name }}</h3>
+    {% for student in item.students %}
+      <li>{{ student }}</li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+</body>
+</html>

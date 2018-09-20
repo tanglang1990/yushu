@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>对象</title>
+</head>
+<body>
+{% if teacher %}
+  姓名：{{ teacher.name }} <br/>
+  学生：{{ teacher.students }} <br/>
+  {% for student in teacher.students %}
+    {{ student }}
+  {% endfor %}
+{% endif %}
+</body>
+</html>

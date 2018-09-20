@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>判断</title>
+</head>
+<body>
+{# if 和python中的用法基本一致 #}
+
+{% if user.age == 18 %}
+  {{ user.name }} 刚刚18岁
+{% endif %}
+
+<hr/>
+
+{% if user.age >= 18 %}
+  {{ user.name }} 已经满18岁了
+{% else %}
+  {{ user.name }} 还未满18岁
+{% endif %}
+
+<hr/>
+
+{% if user.age > 18 %}
+  {{ user.name }} 已经不止18岁了
+{% elif user.age==18 %}
+  {{ user.name }} 刚好18岁
+{% else %}
+  {{ user.name }} 还不到18岁
+{% endif %}
+</body>
+</html>

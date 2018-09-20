@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+  {{ user.name }}  <br/>
+  {{ user.age | default('未知年龄') }}  <br/>
+  {#  | 有点像Linux中的管道符, 把前面的结果转给下一个过滤器 #}
+  {{ user.info }} <br/>
+  {{ user.info | safe }} <br/>
+{% endblock %}
