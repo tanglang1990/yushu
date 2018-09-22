@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>通过静态文件及api构建的页面</title>
+  <link rel="stylesheet" href="/static/css/base.css"/>
+</head>
+<body>
+<h3>Student List</h3>
+<div id="student_list">
+</div>
+<script src="/static/js/jquery-3.2.1.min.js"></script>
+<script>
+    $.ajax({
+        type: "POST",
+        url: "/student/list",
+        success: function (rsp) {
+            if (rsp.ok) {
+                $(rsp.students).each(function (index, obj) {
+                    var student_html = "<p>" + obj.id + ' ' + obj.username + "</p>"
+                    $("#student_list").append(student_html)
+                });
+            } else {
+                alert(rsp.msg)
+            }
+        }
+    });
+</script>
+</body>
+</html>

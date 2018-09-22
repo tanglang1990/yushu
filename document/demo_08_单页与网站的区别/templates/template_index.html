@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>直接渲染的网站</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}"/>
+</head>
+<body>
+<h3>Student List</h3>
+<div id="student_list">
+  {% for obj in objs %}
+  <p>{{ obj.id }} {{ obj.username }}</p>
+  {% endfor %}
+</div>
+</body>
+</html>
