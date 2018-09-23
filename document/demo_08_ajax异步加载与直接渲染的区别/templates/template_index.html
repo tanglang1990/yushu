@@ -7,9 +7,14 @@
 </head>
 <body>
 <h3>Student List</h3>
+<form>
+  关键字: <input type="text" id="kw" name="keyword">
+  <input type="submit" value="搜索">
+</form>
+<hr/>
 <div id="student_list">
-  {% for obj in objs %}
-  <p>{{ obj.id }} {{ obj.username }}</p>
+  {% for obj in students %}
+    <p>{{ obj.id }} {{ obj.username }}</p>
   {% endfor %}
 </div>
 </body>
