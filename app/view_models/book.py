@@ -51,4 +51,11 @@ class BookViewModel:
             'summary': data['summary'],
             'image': data['image']
         }
+        book['intro'] = cls.intro(book)
         return book
+
+    @staticmethod
+    def intro(book):
+        intros = filter(lambda x: True if x else False,
+                        [book['author'], book['publisher'], book['price']])
+        return ' / '.join(intros)
