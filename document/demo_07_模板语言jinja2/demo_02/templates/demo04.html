@@ -11,6 +11,10 @@
   {% for student in teacher.students %}
     {{ student }}
   {% endfor %}
+  <br/>
+  {{ teacher.intro() }}
+  <br/>
+  {{ teacher.property_intro }}
 {% endif %}
 </body>
 </html>
