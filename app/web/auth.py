@@ -1,7 +1,6 @@
-from flask import render_template, request
-from werkzeug.security import generate_password_hash
+from flask import render_template, request, redirect, url_for
 
-from app.forms.register import RegisterForm
+from app.forms.auth import RegisterForm, LoginForm
 from app.models.base import db
 from app.models.user import User
 from . import web
@@ -16,13 +15,18 @@ def register():
         # user.password = generate_password_hash(form.password.data)
         db.session.add(user)
         db.session.commit()
+        return redirect(url_for('web.login'))
 
     return render_template('auth/register.html', form=form)
 
 
 @web.route('/login', methods=['GET', 'POST'])
 def login():
-    pass
+    form = LoginForm(request.form)
+    if request.method == 'POST' and form.validate():
+        pass
+
+    return render_template('auth/login.html', form=form)
 
 
 @web.route('/reset/password', methods=['GET', 'POST'])
