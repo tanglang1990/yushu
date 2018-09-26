@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Boolean, Float
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from app.models.base import Base
 
@@ -21,9 +21,9 @@ class User(Base):
     def password(self):
         return self._password
 
-    # 可能大家能够理解却还是不会用property的getter与setter
-    # 记住代码一定要尝试去写，这样才能写出地道的python代码
-    # 通过这种方式我们还能对属性实现只读，在下述方法中抛出异常，而不设置值即可
     @password.setter
     def password(self, raw):
         self._password = generate_password_hash(raw)
+
+    def check_password(self, password):
+        return check_password_hash(self._password, password)
