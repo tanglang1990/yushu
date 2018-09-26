@@ -12,4 +12,3 @@ class User(db.Model):
     beans = Column(Float, default=0)
     send_counter = Column(Integer, default=0)
     receive_counter = Column(Integer, default=0)
-
