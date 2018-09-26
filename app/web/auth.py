@@ -1,4 +1,5 @@
 from flask import render_template, request
+from werkzeug.security import generate_password_hash
 
 from app.forms.register import RegisterForm
 from app.models.user import User
@@ -10,8 +11,8 @@ def register():
     form = RegisterForm(request.form)
     if request.method == 'POST' and form.validate():
         user = User()
-        # user.email = form.email.data
-        # user.nickname = form.nickname.data
+        user.set_attrs(form.data)
+        # user.password = generate_password_hash(form.password.data)
 
     return render_template('auth/register.html', form={'data': {}})
 
