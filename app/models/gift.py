@@ -1,10 +1,10 @@
 from sqlalchemy import Column, Integer, Boolean, ForeignKey, String
 from sqlalchemy.orm import relationship
 
-from app.models.base import db
+from app.models.base import Base
 
 
-class Gift(db.Model):
+class Gift(Base):
     id = Column(Integer, primary_key=True)
     user = relationship('User')
     uid = Column(Integer, ForeignKey('user.id'))  # 如果上面的属性user是user1那么这里应该写成 user1.id
