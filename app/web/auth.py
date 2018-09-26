@@ -2,6 +2,7 @@ from flask import render_template, request
 from werkzeug.security import generate_password_hash
 
 from app.forms.register import RegisterForm
+from app.models.base import db
 from app.models.user import User
 from . import web
 
@@ -13,8 +14,10 @@ def register():
         user = User()
         user.set_attrs(form.data)
         # user.password = generate_password_hash(form.password.data)
+        db.session.add(user)
+        db.session.commit()
 
-    return render_template('auth/register.html', form={'data': {}})
+    return render_template('auth/register.html', form=form)
 
 
 @web.route('/login', methods=['GET', 'POST'])
