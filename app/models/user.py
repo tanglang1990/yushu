@@ -1,10 +1,11 @@
 from sqlalchemy import Column, Integer, String, Boolean, Float
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 from app.models.base import Base
 
 
-class User(Base):
+class User(UserMixin, Base):
     # __tablename__ = 'yushu_user'
     id = Column(Integer, primary_key=True)
     nickname = Column(String(24), nullable=False)
@@ -27,3 +28,6 @@ class User(Base):
 
     def check_password(self, password):
         return check_password_hash(self._password, password)
+
+    # def get_id(self):
+    #     return self.id

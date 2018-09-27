@@ -1,4 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash
+from flask_login import login_user
 
 from app.forms.auth import RegisterForm, LoginForm
 from app.models.base import db
@@ -29,7 +30,15 @@ def login():
         if user and user.check_password(form.password.data):
             # 在此处需要写入票据(cookie)信息
             # 整个管理我们可以依赖于已有的插件flask-login
-            pass
+            # 官方文档 http://www.pythondoc.com/flask-login/
+            # login_user中可以通过 关键字参数 remember=True 设定记住密码，
+            # 配置 REMEMBER_COOKIE_DURATION 可以设置时长（默认365天）
+            # 此外 login_user还可以通过 关键字参数 duration 设定指定时长
+            # import datetime
+            # duration = datetime.timedelta(seconds=30) # 30秒
+            # duration = duration
+            # login_user(user, remember=True, duration=duration)
+            login_user(user, remember=True)
         else:
             flash('用户名或密码错误')
     return render_template('auth/login.html', form=form)
