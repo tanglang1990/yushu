@@ -1,5 +1,19 @@
-from flask_sqlalchemy import SQLAlchemy
+from contextlib import contextmanager
+
+from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
 from sqlalchemy import Column, SmallInteger
+
+
+class SQLAlchemy(_SQLAlchemy):
+    @contextmanager
+    def auto_commit(self):
+        try:
+            db.session.commit()
+            yield
+        except Exception as e:
+            db.session.rollback()
+            raise e
+
 
 db = SQLAlchemy()
 
