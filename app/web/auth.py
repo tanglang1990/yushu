@@ -38,6 +38,12 @@ def login():
             # duration = datetime.timedelta(seconds=30) # 30秒
             # login_user(user, remember=True, duration=duration)
             login_user(user, remember=True)
+            next = request.args.get('next')
+            # or not next.startswith('/') 可以防止重定向攻击
+            # 如：http://127.0.0.1:81/login?next=http://www.qq.com
+            if not next or not next.startswith('/'):
+                next = url_for('web.index')
+            return redirect(next)
         else:
             flash('用户名或密码错误')
     return render_template('auth/login.html', form=form)

@@ -11,7 +11,11 @@ def create_app():
     app.config.from_object('app.secure')
     app.config.from_object('app.setting')
     registe_blueprint(app)
+
     login_manager.init_app(app)
+    login_manager.login_view = 'web.login'
+    login_manager.login_message = '请先登录或注册'
+
     db.init_app(app)
     with app.app_context():
         db.create_all()
