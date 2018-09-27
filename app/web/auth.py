@@ -36,7 +36,6 @@ def login():
             # 此外 login_user还可以通过 关键字参数 duration 设定指定时长
             # import datetime
             # duration = datetime.timedelta(seconds=30) # 30秒
-            # duration = duration
             # login_user(user, remember=True, duration=duration)
             login_user(user, remember=True)
         else:
