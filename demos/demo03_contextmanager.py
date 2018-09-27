@@ -28,3 +28,14 @@ def make_myresource():
 
 with make_myresource() as r:
     r.query()
+
+
+@contextmanager
+def book_mark():
+    print('《', end='')
+    yield
+    print('》', end='')
+
+
+with book_mark():
+    print("神雕侠侣", end='')
