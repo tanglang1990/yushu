@@ -42,7 +42,6 @@ class BookViewModel:
 
     @classmethod
     def handle_book_data(cls, data):
-        print(data)
         book = {
             'isbn': data.get('isbn13') or data.get('isbn10'),
             'title': data['title'],
