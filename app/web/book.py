@@ -51,6 +51,8 @@ def book_detail(isbn):
     if current_user.is_authenticated:
         if Gift.query.filter_by(uid=current_user.id, isbn=isbn,
                                 launched=False).first():
+            # 之前有讲过我们使用的是软删除，这个时候我们其实还需要在filter_by中添加 status=1
+            # 这是类似废话的一句话，那么我们怎样便捷的在所有的查询中加入这么一个条件呢？
             has_in_gifts = True
         if Wish.query.filter_by(uid=current_user.id, isbn=isbn,
                                 launched=False).first():
