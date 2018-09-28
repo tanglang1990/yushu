@@ -1,8 +1,10 @@
-from flask import jsonify, render_template, flash
+from flask import render_template, flash
 from flask import request
 
 from app.forms.book import SearchForm
 from app.libs.helper import is_isbn_or_key
+from app.models.gift import Gift
+from app.models.wish import Wish
 from app.spider.yushu_book import YuShuBook
 from app.view_models.book import BookViewModel
 
@@ -33,8 +35,18 @@ def search():
 
 @web.route('/book/<isbn>/detail')
 def book_detail(isbn):
+    has_in_gifts = False
+    has_in_wishes = False
+    # 联系到 User中 can_save_to_list 方法讲过的，及我们的产品设计，一个人不能同时既赠送此书又希望得到此书
+    # 书本对应用户一共会存在三种关系：
+    # 1、既不在赠送清单也不在心愿清单中 2、在赠送清单但不在心愿清单中 3、在心愿清单但不在赠送清单中
+
     data = YuShuBook.search_by_isbn(isbn)
     book = BookViewModel.handle_book_data(data)
+
+    trade_gifts = Gift.query.filter_by(isbn=isbn, launched=False).all()
+    trade_wishes = Wish.query.filter_by(isbn=isbn, launched=False).all()
+
     return render_template('book_detail.html', book=book, wishes=[], gifts=[])
 
 
