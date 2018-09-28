@@ -9,6 +9,9 @@ from . import web
 @web.route('/my/gifts')
 @login_required
 def my_gifts():
+    uid = current_user.id
+    gifts_of_mine = Gift.get_user_gifts(uid)
+    isbn_list = [gift.isbn for gift in gifts_of_mine]
     return 'My Gifts'
 
 

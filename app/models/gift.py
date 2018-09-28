@@ -34,3 +34,13 @@ class Gift(Base):
             desc(cls.create_time)).limit(
             current_app.config['RECENT_BOOK_COUNT']).distinct().all()
         return recent_gift
+
+    @classmethod
+    def get_user_gifts(cls, uid):
+        gifts = Gift.query.filter_by(uid=uid, launched=False).order_by(
+            desc(Gift.create_time)).all()
+        return gifts
+
+    @classmethod
+    def get_wish_counts(cls, isbn_list):
+        pass
