@@ -3,6 +3,8 @@ from sqlalchemy import Column, Integer, Boolean, ForeignKey, String, desc
 from sqlalchemy.orm import relationship
 
 from app.models.base import Base
+from app.spider.yushu_book import YuShuBook
+from app.view_models.book import BookViewModel
 
 
 class Gift(Base):
@@ -13,6 +15,12 @@ class Gift(Base):
     # book = relationship('Book') # 由于我们的book是一张空表，故这里只记录上面的isbn号即可
     # bid = Column(Integer, ForeignKey('book.id'))
     launched = Column(Boolean, default=False)
+
+    @property
+    def book(self):
+        data = YuShuBook.search_by_isbn(self.isbn)
+        book = BookViewModel.handle_book_data(data)
+        return book
 
     @classmethod
     def recent(cls):
