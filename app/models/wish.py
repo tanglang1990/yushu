@@ -29,6 +29,7 @@ class Wish(Base):
     def get_gift_counts(cls, isbn_list):
         # 输入：['9787108006721', '9787544247252']
         # 输出：{'9787108006721':1, '9787544247252':2}]
+        from app.models.gift import Gift
         count_list = db.session.query(func.count(Gift.id), Gift.isbn).filter(
             Gift.launched == False,
             Gift.isbn.in_(isbn_list),
@@ -36,6 +37,3 @@ class Wish(Base):
             Gift.isbn).all()
         count_dict = {w[1]: w[0] for w in count_list}
         return count_dict
-
-
-from app.models.gift import Gift

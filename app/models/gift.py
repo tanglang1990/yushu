@@ -54,6 +54,7 @@ class Gift(Base):
         # 条件表达式
         # mysql in
         # isbn wish的数量
+        from app.models.wish import Wish
         count_list = db.session.query(func.count(Wish.id), Wish.isbn).filter(
             Wish.launched == False,
             Wish.isbn.in_(isbn_list),
@@ -63,5 +64,3 @@ class Gift(Base):
         count_dict = {w[1]: w[0] for w in count_list}
         return count_dict
 
-
-from app.models.wish import Wish
