@@ -5,7 +5,6 @@ from sqlalchemy import Column, Integer, Boolean, ForeignKey, String, desc, func
 from sqlalchemy.orm import relationship
 
 from app.models.base import Base, db
-from app.models.wish import Wish
 from app.spider.yushu_book import YuShuBook
 from app.view_models.book import BookViewModel
 
@@ -63,3 +62,6 @@ class Gift(Base):
         # count_list = [{'count': w[0], 'isbn': w[1]} for w in count_list]
         count_dict = {w[1]: w[0] for w in count_list}
         return count_dict
+
+
+from app.models.wish import Wish
