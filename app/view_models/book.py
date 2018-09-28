@@ -50,7 +50,9 @@ class BookViewModel:
             'author': '、'.join(data['author']),
             'price': data['price'],
             'summary': data['summary'],
-            'image': data['image']
+            'image': data['image'],
+            'pubdate': data['pubdate'],
+            'binding': data['binding'],
         }
         book['intro'] = cls.intro(book)
         return book
