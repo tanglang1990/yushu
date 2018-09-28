@@ -12,6 +12,7 @@ def my_gifts():
     uid = current_user.id
     gifts_of_mine = Gift.get_user_gifts(uid)
     isbn_list = [gift.isbn for gift in gifts_of_mine]
+    wish_count_list = Gift.get_wish_counts(isbn_list)
     return 'My Gifts'
 
 
