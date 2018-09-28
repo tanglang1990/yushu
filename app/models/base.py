@@ -36,3 +36,10 @@ class Base(db.Model):
         for key, value in attrs_dict.items():
             if hasattr(self, key) and key not in ['id']:
                 setattr(self, key, value)
+
+    @property
+    def create_datetime(self):
+        if self.create_time:
+            return datetime.fromtimestamp(self.create_time)
+        else:
+            return None
