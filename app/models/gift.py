@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 from flask import current_app
 from sqlalchemy import Column, Integer, Boolean, ForeignKey, String, desc, func
 from sqlalchemy.orm import relationship
@@ -46,8 +48,8 @@ class Gift(Base):
     def get_wish_counts(cls, isbn_list):
         # 根据传入的一组isbn，到Wish表中计算出某个礼物
         # 的Wish心愿数量
-        # 输入：['9787108006721', '9787544247252', '9787208084094']
-        # 输出：记录每个isbn的书相对应需要该书的人数
+        # 输入：['9787108006721', '9787544247252']
+        # 输出：{'9787108006721':1, '9787544247252':2}]
         # 一个数量吗？
         # 一组数量
         # 条件表达式
@@ -58,4 +60,6 @@ class Gift(Base):
             Wish.isbn.in_(isbn_list),
             Wish.status == 1).group_by(
             Wish.isbn).all()
-        pass
+        # count_list = [{'count': w[0], 'isbn': w[1]} for w in count_list]
+        count_dict = {w[1]: w[0] for w in count_list}
+        return count_dict
