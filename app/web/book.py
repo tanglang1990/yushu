@@ -1,5 +1,6 @@
 from flask import render_template, flash
 from flask import request
+from flask_login import current_user
 
 from app.forms.book import SearchForm
 from app.libs.helper import is_isbn_or_key
@@ -7,6 +8,7 @@ from app.models.gift import Gift
 from app.models.wish import Wish
 from app.spider.yushu_book import YuShuBook
 from app.view_models.book import BookViewModel
+from app.view_models.trade import TradeInfo
 
 from . import web
 
@@ -41,13 +43,27 @@ def book_detail(isbn):
     # 书本对应用户一共会存在三种关系：
     # 1、既不在赠送清单也不在心愿清单中 2、在赠送清单但不在心愿清单中 3、在心愿清单但不在赠送清单中
 
+    # 获取书籍数据
     data = YuShuBook.search_by_isbn(isbn)
     book = BookViewModel.handle_book_data(data)
 
+    # 判断用户是否登录
+    if current_user.is_authenticated:
+        if Gift.query.filter_by(uid=current_user.id, isbn=isbn,
+                                launched=False).first():
+            has_in_gifts = True
+        if Wish.query.filter_by(uid=current_user.id, isbn=isbn,
+                                launched=False).first():
+            has_in_wishes = True
+
     trade_gifts = Gift.query.filter_by(isbn=isbn, launched=False).all()
     trade_wishes = Wish.query.filter_by(isbn=isbn, launched=False).all()
+    wishes = TradeInfo(trade_wishes)
+    gifts = TradeInfo(trade_gifts)
 
-    return render_template('book_detail.html', book=book, wishes=[], gifts=[])
+    return render_template(
+        'book_detail.html', book=book, wishes=wishes, gifts=gifts,
+        has_in_gifts=has_in_gifts, has_in_wishes=has_in_wishes)
 
 
 @web.route('/test')
