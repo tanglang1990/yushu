@@ -53,10 +53,7 @@ def forget_password_request():
     form = EmailForm(request.form)
     if request.method == 'POST' and form.validate():
         account_email = form.email.data
-        try:
-            user = User.query.filter_by(email=account_email).first_or_404()
-        except Exception:
-            return render_template('404.html')
+        user = User.query.filter_by(email=account_email).first_or_404()
     return render_template('auth/forget_password_request.html')
 
 
