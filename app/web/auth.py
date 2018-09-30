@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user
 
 from app.forms.auth import RegisterForm, LoginForm, EmailForm
+from app.libs.emailer import send_mail
 from app.models.base import db
 from app.models.user import User
 from . import web
@@ -54,6 +55,11 @@ def forget_password_request():
     if request.method == 'POST' and form.validate():
         account_email = form.email.data
         user = User.query.filter_by(email=account_email).first_or_404()
+        # 发送邮件，在python中可以使用smtplib, 但使用比较复杂
+        # 而flask提供了 flask-mail插件，官方文档 https://pythonhosted.org/Flask-Mail/
+        # 我们使用flask-mail插件来发送邮件
+        send_mail()
+
     return render_template('auth/forget_password_request.html')
 
 

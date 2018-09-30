@@ -112,5 +112,4 @@ dmypy.json
 
 # ide
 *.idea/
-
-
+/tmp
