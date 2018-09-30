@@ -1,5 +1,7 @@
+from flask import current_app
 from sqlalchemy import Column, Integer, String, Boolean, Float
 from werkzeug.security import generate_password_hash, check_password_hash
+from itsdangerous import TimedJSONWebSignatureSerializer as TimedSerializer
 from flask_login import UserMixin
 
 from app.libs.helper import is_isbn_or_key
@@ -37,9 +39,14 @@ class User(UserMixin, Base):
     # def get_id(self):
     #     return self.id
 
-    # web开发对算法要求虽然不高，但对逻辑思维的要求其实是比较高的
-    # 没有较强的逻辑思维能力，可能会存在理不清需求或写出有问题代码的可能
-    # 需要慢慢锻炼自己的逻辑思维能力
+    def generate_token(self, expiration=600):
+        s = TimedSerializer(current_app.config['SECRET_KEY'], expiration)
+        return s.dumps({'id': self.id}).decode('utf-8')
+
+    @staticmethod
+    def reset_password(new_password):
+        pass
+
     def can_save_to_list(self, isbn):
         if is_isbn_or_key(isbn) != 'isbn':
             return False
