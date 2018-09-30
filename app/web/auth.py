@@ -58,7 +58,9 @@ def forget_password_request():
         # 发送邮件，在python中可以使用smtplib, 但使用比较复杂
         # 而flask提供了 flask-mail插件，官方文档 https://pythonhosted.org/Flask-Mail/
         # 我们使用flask-mail插件来发送邮件
-        send_mail()
+        send_mail(
+            form.email.data, '重置你的密码', 'email/reset_password.html',
+            user=user, token='123456')
 
     return render_template('auth/forget_password_request.html')
 
