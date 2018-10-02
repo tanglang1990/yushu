@@ -33,6 +33,7 @@ def save_to_gifts(isbn):
             gift.uid = current_user.id
             current_user.beans += current_app.config['BEANS_UPLOAD_ONE_BOOK']
             db.session.add(gift)
+            db.session.add(current_user)
             # db.session.commit()
         # except Exception as e:
         #     db.session.rollback()
