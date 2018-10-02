@@ -64,3 +64,5 @@ class Gift(Base):
         count_dict = {w[1]: w[0] for w in count_list}
         return count_dict
 
+    def is_yourself_gift(self, uid):
+        return True if self.uid == uid else False

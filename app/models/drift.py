@@ -1,5 +1,5 @@
 from app.models.base import Base
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, SmallInteger
 
 
 class Drift(Base):
@@ -33,3 +33,5 @@ class Drift(Base):
     # requester = relationship('User')
     # gift_id = Column(Integer, ForeignKey('gift.id'))
     # gift = relationship('Gift')
+
+    pending = Column('pending', SmallInteger, default=1)
