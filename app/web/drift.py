@@ -1,5 +1,5 @@
 from flask import flash, redirect, url_for, render_template, request
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 from app.forms.book import DriftForm
 from app.libs.emailer import send_mail
@@ -10,6 +10,7 @@ from . import web
 
 
 @web.route('/drift/<int:gid>', methods=['GET', 'POST'])
+@login_required
 def send_drift(gid):
     current_gift = Gift.query.get_or_404(gid)
 
