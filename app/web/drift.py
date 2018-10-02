@@ -7,6 +7,7 @@ from app.libs.emailer import send_mail
 from app.models.base import db
 from app.models.drift import Drift
 from app.models.gift import Gift
+from app.view_models.drift import DriftCollection
 from . import web
 
 
@@ -43,7 +44,9 @@ def pending():
         or_(Drift.requester_id == current_user.id,
             Drift.gifter_id == current_user.id)) \
         .order_by(desc(Drift.create_time)).all()
-    pass
+
+    views = DriftCollection(drifts, current_user.id)
+    return render_template('pending.html', drifts=views.data)
 
 
 @web.route('/drift/<int:did>/reject')
