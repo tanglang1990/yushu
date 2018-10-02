@@ -69,7 +69,12 @@ def forget_password_request():
 def forget_password(token):
     form = ResetPasswordForm(request.form)
     if request.method == 'POST' and form.validate():
-        pass
+        success = User.reset_password(token, form.password1.data)
+        if success:
+            flash('你的密码已更新,请使用新密码登录')
+            return redirect(url_for('web.login'))
+        else:
+            flash('密码重置失败')
     return render_template('auth/forget_password.html', form=form)
 
 

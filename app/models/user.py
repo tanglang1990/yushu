@@ -5,7 +5,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as TimedSerializer
 from flask_login import UserMixin
 
 from app.libs.helper import is_isbn_or_key
-from app.models.base import Base
+from app.models.base import Base, db
 from app import login_manager
 from app.models.gift import Gift
 from app.models.wish import Wish
@@ -44,8 +44,17 @@ class User(UserMixin, Base):
         return s.dumps({'id': self.id}).decode('utf-8')
 
     @staticmethod
-    def reset_password(new_password):
-        pass
+    def reset_password(token, new_password):
+        s = TimedSerializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token.encode('utf-8'))
+        except:
+            return False
+        uid = data.get('id')
+        with db.auto_commit():
+            user = User.query.get(uid)
+            user.password = new_password
+        return True
 
     def can_save_to_list(self, isbn):
         if is_isbn_or_key(isbn) != 'isbn':
