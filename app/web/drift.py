@@ -56,10 +56,16 @@ def reject_drift(did):
 
 
 @web.route('/drift/<int:did>/redraw')
+@login_required
 def redraw_drift(did):
+    # 超权
+    # uid :1  did:1
+    # uid :2  did:2
     with db.auto_commit():
-        drift = Drift.query.filter(Drift.id == did).first_or_404()
+        drift = Drift.query.filter_by(
+            requester_id=current_user.id, id=did).first_or_404()
         drift.pending = PendingStatus.Redraw
+        current_user.beans += 1
     return redirect(url_for('web.pending'))
 
 
