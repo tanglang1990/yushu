@@ -9,6 +9,7 @@ flask-sqlalchemy = "*"
 flask-login = "*"
 flask-cache = "*"
 flask-mail = "*"
+pymysql = "*"
 
 [dev-packages]
 
