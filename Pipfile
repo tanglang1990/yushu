@@ -10,6 +10,7 @@ flask-login = "*"
 flask-cache = "*"
 flask-mail = "*"
 pymysql = "*"
+requests = "*"
 
 [dev-packages]
 
