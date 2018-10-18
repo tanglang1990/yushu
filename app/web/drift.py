@@ -56,8 +56,8 @@ def pending():
 @login_required
 def reject_drift(did):
     with db.auto_commit():
-        drift = Drift.query.filter(Gift.uid == current_user.id,
-                                   Drift.id == did).first_or_404()
+        drift = Drift.query.filter_by(
+            gifter_id=current_user.id, id=did).first_or_404()
         drift.pending = PendingStatus.Reject
         requester = User.query.get_or_404(drift.requester_id)
         requester.beans += current_app.config['BEANS_TRADE_ONE_BOOK']
