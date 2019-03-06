@@ -15,14 +15,14 @@ connParam = {'host': '127.0.0.1', 'port': 3306, 'user': 'root',
 # conn = pymysql.connect(**connParam)  # 创建连接
 # cur = conn.cursor()  # 游标
 # cur.execute("SELECT id,username, age FROM user")  # 执行
-# a = cur.fetchone() # 取出第一条
-# print(a)
+# # a = cur.fetchone() # 取出第一条
+# # print(a)
 # a = cur.fetchall() # 取出所有
 # print(a)
-# a = cur.fetchmany(2) # 取出指定条数
-# print(a)
-# for r in cur:  # 遍历结果
-#     print(r)
+# # a = cur.fetchmany(4) # 取出指定条数
+# # print(a)
+# # for r in cur:  # 遍历结果
+# #     print(r)
 # cur.close()  # 关闭游标
 # conn.close()  # 关闭连接
 
@@ -35,7 +35,7 @@ connParam = {'host': '127.0.0.1', 'port': 3306, 'user': 'root',
 # cur.execute("SELECT id,username, age FROM user")
 # for r in cur:
 #     print(r)
-#     print(r['id'])
+#     # print(r['id'])
 # cur.close()
 # conn.close()
 
@@ -44,7 +44,7 @@ connParam = {'host': '127.0.0.1', 'port': 3306, 'user': 'root',
 # conn = pymysql.connect(**connParam)
 # # 创建游标
 # cursor = conn.cursor()
-# # 执行SQL，并返回收影响行数
+# 执行SQL，并返回收影响行数
 # effect_row = cursor.execute("UPDATE user SET username =  CONCAT(username, '1') ")
 # print(effect_row)
 # effect_row = cursor.execute("update user set username = 'ten1' where id=%s", (1,))
@@ -60,7 +60,7 @@ connParam = {'host': '127.0.0.1', 'port': 3306, 'user': 'root',
 # conn.close()
 
 
-# # 获取新创建数据自增ID
+# # # 获取新创建数据自增ID
 # conn = pymysql.connect(**connParam)
 # cursor = conn.cursor()
 # cursor.execute("insert into user (username, age)values(%s,%s)", (f"腾老师{random.randint(1, 100)}", '18'))
@@ -70,3 +70,6 @@ connParam = {'host': '127.0.0.1', 'port': 3306, 'user': 'root',
 # conn.commit()
 # cursor.close()
 # conn.close()
+
+
+# ORM
